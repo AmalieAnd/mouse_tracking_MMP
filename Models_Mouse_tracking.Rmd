@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 library(pacman)
-p_load(tidyverse, mousetrack, mousetrap)
+p_load(tidyverse, mousetrack, mousetrap, ggplot2)
 
 setwd("~/Library/Mobile Documents/com~apple~CloudDocs/4. Aarhus Universitet/4. Semester/3. Models for perception and action/5. Decisions in the hand/Mouse_tracking")
 ```
@@ -20,9 +20,52 @@ load("MTrap_Pilot20190314.R")
 df_sin <- filter(df, df$TestTrial == 0)
 ```
 
+### Visualization
+1. Plot single trajectories (Everybody should do at least this)
+```{r}
+single <- filter(df, df$ID == 105955, df$Trial == 1)
+
+ggplot(single, aes (x = Pos_x, y = Pos_y)) +
+  geom_smooth(aes(x = Pos_x, y = Pos_y), color ="#5098A6", se =F) +
+  xlim(-300,300) +
+  geom_vline(xintercept = 0, linetype = 2, alpha =0.5) 
+
+```
+
+2. Plot several trajectories on top of each other 3. Plot aggregated trajectories
+```{r}
+multiple <- filter(df, df$Trial == 5, df$Volatility == "L", df$GainLoss == "Gain")
+
+ggplot(multiple, aes (x = Pos_x, y = Pos_y)) +
+  geom_smooth(aes(x = Pos_x, y = Pos_y, group=ID, colour = ID), se = F) +
+  xlim(-300,300) +
+  geom_vline(xintercept = 0, linetype = 2) 
+  #facet_wrap(~ID)
+
+```
 
 
-```{r }
+3. Measuring trajectory
+```{r}
+henning <- filter(df, df$ID == 105955, df$Trial == 1, df$GainLoss == "Gain")
+
+a <- sum(abs(diff(henning$Pos_x)))
+b <- sum(abs(diff(henning$Pos_y)))
+c <- (a^2 + b^2)
+sqrt(c)
+
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+```{r } 
 mt_derivatives(df) 
 mt_measures() 
 mt_plot()
