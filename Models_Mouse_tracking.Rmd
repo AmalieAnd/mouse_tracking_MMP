@@ -1,0 +1,31 @@
+---
+title: "Models_Mouse_tracking"
+author: "Amalie Lysgaard Andersen"
+date: "21/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(pacman)
+p_load(tidyverse, mousetrack, mousetrap)
+
+setwd("~/Library/Mobile Documents/com~apple~CloudDocs/4. Aarhus Universitet/4. Semester/3. Models for perception and action/5. Decisions in the hand/Mouse_tracking")
+```
+
+```{r data}
+load("MT_Pilot20190314.R")
+load("MTrap_Pilot20190314.R")
+
+# filtering trials
+df_sin <- filter(df, df$TestTrial == 0)
+```
+
+
+
+```{r }
+mt_derivatives(df) 
+mt_measures() 
+mt_plot()
+mt_heatmap()
+```
+
