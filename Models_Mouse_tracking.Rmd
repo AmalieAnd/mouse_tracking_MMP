@@ -45,7 +45,7 @@ ggplot(multiple, aes (x = Pos_x, y = Pos_y)) +
 ```
 
 
-3. Measuring trajectory
+3. Measuring trajectory (NOTE THIS IS NOT THE RIGHT PROCEDURE!)
 ```{r}
 henning <- filter(df, df$ID == 105955, df$Trial == 1, df$GainLoss == "Gain")
 
@@ -54,15 +54,12 @@ b <- sum(abs(diff(henning$Pos_y)))
 c <- (a^2 + b^2)
 sqrt(c)
 
+
+### RIFHT CODE
+correct_manualdist <- sum(sqrt(diff(df$Pos_x)^2 + diff(df$Pos_y)^2))
+correct_manualdist
+
 ```
-
-```{r}
-
-```
-
-
-
-
 
 
 ```{r } 
@@ -71,4 +68,9 @@ mt_measures()
 mt_plot()
 mt_heatmap()
 ```
+
+```{r}
+load("InstructorClass_190328.R")
+```
+
 
