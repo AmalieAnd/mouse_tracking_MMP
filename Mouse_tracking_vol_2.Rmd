@@ -134,7 +134,7 @@ t.test(log(total_dist)~Volatility, data = per_subject_testgain, paired = T)
 # mean of the differences 
 #             0.03210272 
 
-#Uh very low corr
+#Uh very low corr, and conf int crosses zero. Mate there's nothing here
 ```
 
 
@@ -169,7 +169,7 @@ mt_plot(mtsub, use = "trajectories", use2 = mt[[1]][mtsubset_ids,], facet_col = 
 spatial <- mt_spatialize(mtsub)
 cluster_test <- mt_cluster(spatial, n_cluster = 4, use = "sp_trajectories")  #creating clusters and testing they difference
 
-# CLUSTER PLOT
+# CLUSTER PLOT acc to each cluster
 mt_plot(spatial, use="trajectories", use2 = cluster_test, facet_col="cluster")
 
 ```
